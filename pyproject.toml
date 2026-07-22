@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "maji-db-client"
+version = "0.1.0"
+description = "Typed synchronous and asynchronous Python clients for tenant-scoped Maji database access"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Maji AI" }]
+keywords = ["supabase", "postgrest", "database", "async", "multi-tenant"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Typing :: Typed",
+]
+dependencies = [
+    "httpx>=0.28,<1",
+    "pydantic>=2.10,<3",
+]
+
+[project.urls]
+Homepage = "https://github.com/maji-ai/maji-db-client"
+Repository = "https://github.com/maji-ai/maji-db-client.git"
+Issues = "https://github.com/maji-ai/maji-db-client/issues"
+
+[project.optional-dependencies]
+dev = [
+    "build>=1.2,<2",
+    "pytest>=8.3,<9",
+    "pytest-asyncio>=0.25,<2",
+    "twine>=6,<7",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+maji_db_client = ["py.typed"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

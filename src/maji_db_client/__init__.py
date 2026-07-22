@@ -1,0 +1,55 @@
+"""Typed synchronous and asynchronous clients for Maji database services."""
+
+from .async_supabase_client import AsyncSupabaseDatabaseClient
+from .client import DatabaseApiClient, DatabaseApiError
+from .models import (
+    ApiData,
+    ChatData,
+    DepartmentData,
+    DepartmentDocumentData,
+    DocumentData,
+    DocumentProjectData,
+    InvitationData,
+    MeetingAttendeeData,
+    MeetingCoordinatorData,
+    MeetingData,
+    MessageData,
+    OrganizationData,
+    ParentChunkData,
+    ProjectData,
+    ProjectUserData,
+    SectionBulletPointData,
+    SectionSummaryData,
+    TaskData,
+    TranscriptionData,
+    UserData,
+)
+from .supabase_client import SupabaseApiError, SupabaseDatabaseClient
+
+__all__ = [
+    "ApiData",
+    "AsyncSupabaseDatabaseClient",
+    "ChatData",
+    "DatabaseApiClient",
+    "DatabaseApiError",
+    "DepartmentData",
+    "DepartmentDocumentData",
+    "DocumentData",
+    "DocumentProjectData",
+    "InvitationData",
+    "MeetingAttendeeData",
+    "MeetingCoordinatorData",
+    "MeetingData",
+    "MessageData",
+    "OrganizationData",
+    "ParentChunkData",
+    "ProjectData",
+    "ProjectUserData",
+    "SectionBulletPointData",
+    "SectionSummaryData",
+    "SupabaseApiError",
+    "SupabaseDatabaseClient",
+    "TaskData",
+    "TranscriptionData",
+    "UserData",
+]
