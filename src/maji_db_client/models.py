@@ -101,13 +101,12 @@ class MeetingData(ApiData):
 
 
 class TranscriptionData(ApiData):
-    """Store one speaker-attributed STT transcript segment."""
+    """Store one STT segment; ``sequence_number`` optionally preserves order."""
 
     transcription_id: UUID
     meeting_id: UUID
     speaker_user_id: UUID
-    start_ms: int
-    end_ms: int
+    sequence_number: int | None = None
     text: str
     language: str | None = None
     chunk_id: UUID | None = None

@@ -124,6 +124,23 @@ Additional methods:
 
 Typed models provide validation and autocomplete. Tables without a dedicated model accept dictionaries.
 
+Transcriptions use `sequence_number` for optional STT ordering; the removed `start_ms` and `end_ms` fields must not be sent:
+
+```python
+from maji_db_client import TranscriptionData
+
+segment = TranscriptionData(
+    transcription_id=transcription_id,
+    meeting_id=meeting_id,
+    speaker_user_id=speaker_user_id,
+    sequence_number=1,
+    text="Transcript text",
+    language="en",
+    chunk_id=chunk_id,
+)
+saved = await db.create("transcriptions", segment)
+```
+
 ## Private Maji API
 
 `DatabaseApiClient` remains available for services using the protected Maji FastAPI database endpoint rather than direct Supabase access.

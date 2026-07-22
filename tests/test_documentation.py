@@ -1,8 +1,10 @@
 import inspect
 
+from uuid import UUID
+
 from maji_db_client import (
     ApiData, AsyncSupabaseDatabaseClient, DatabaseApiClient,
-    SupabaseDatabaseClient,
+    SupabaseDatabaseClient, TranscriptionData,
 )
 
 
@@ -43,3 +45,17 @@ def test_typed_payloads_have_documentation() -> None:
     assert len(MODELS) == 19
     for model in MODELS:
         assert inspect.getdoc(model)
+
+
+def test_transcription_payload_uses_sequence_number() -> None:
+    payload = TranscriptionData(
+        transcription_id=UUID("00000000-0000-0000-0000-000000000001"),
+        meeting_id=UUID("00000000-0000-0000-0000-000000000002"),
+        speaker_user_id=UUID("00000000-0000-0000-0000-000000000003"),
+        sequence_number=4,
+        text="Test transcript",
+    )
+
+    assert payload.sequence_number == 4
+    assert "start_ms" not in TranscriptionData.model_fields
+    assert "end_ms" not in TranscriptionData.model_fields
