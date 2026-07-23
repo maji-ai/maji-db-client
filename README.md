@@ -124,6 +124,26 @@ Additional methods:
 
 Typed models provide validation and autocomplete. Tables without a dedicated model accept dictionaries.
 
+Clarifications belong to a meeting. The database generates `clarification_id` and `created_at`; use the returned ID together with `meeting_id` for later operations:
+
+```python
+from maji_db_client import ClarificationData
+
+clarification = await db.create("clarifications", ClarificationData(
+    meeting_id=meeting_id,
+    clarification_content="The clarified answer",
+    trigger_content="The text that triggered clarification",
+    trigger_type="question",
+    feedback=True,
+))
+
+key = {
+    "meeting_id": meeting_id,
+    "clarification_id": clarification["clarification_id"],
+}
+await db.update("clarifications", key, {"feedback": False})
+```
+
 Transcriptions use `sequence_number` for optional STT ordering; the removed `start_ms` and `end_ms` fields must not be sent:
 
 ```python

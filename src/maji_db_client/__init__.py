@@ -5,6 +5,7 @@ from .client import DatabaseApiClient, DatabaseApiError
 from .models import (
     ApiData,
     ChatData,
+    ClarificationData,
     DepartmentData,
     DepartmentDocumentData,
     DocumentData,
@@ -30,6 +31,7 @@ __all__ = [
     "ApiData",
     "AsyncSupabaseDatabaseClient",
     "ChatData",
+    "ClarificationData",
     "DatabaseApiClient",
     "DatabaseApiError",
     "DepartmentData",

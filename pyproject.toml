@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "maji-db-client"
-version = "0.1.1"
+version = "0.1.2"
 description = "Typed synchronous and asynchronous Python clients for tenant-scoped Maji database access"
 readme = "README.md"
 requires-python = ">=3.10"

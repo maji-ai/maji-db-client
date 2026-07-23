@@ -3,7 +3,7 @@ import inspect
 from uuid import UUID
 
 from maji_db_client import (
-    ApiData, AsyncSupabaseDatabaseClient, DatabaseApiClient,
+    ApiData, AsyncSupabaseDatabaseClient, ClarificationData, DatabaseApiClient,
     SupabaseDatabaseClient, TranscriptionData,
 )
 
@@ -42,9 +42,24 @@ def test_crud_apis_include_examples() -> None:
 
 
 def test_typed_payloads_have_documentation() -> None:
-    assert len(MODELS) == 19
+    assert len(MODELS) == 20
     for model in MODELS:
         assert inspect.getdoc(model)
+
+
+def test_clarification_payload_matches_database_contract() -> None:
+    payload = ClarificationData(
+        meeting_id=UUID("00000000-0000-0000-0000-000000000001"),
+        clarification_content="Clarified answer",
+        trigger_content="Original question",
+        trigger_type="question",
+        feedback=True,
+    )
+
+    assert payload.clarification_id is None
+    assert ClarificationData.model_fields["feedback"].is_required()
+    assert not ClarificationData.model_fields["clarification_id"].is_required()
+    assert "created_at" not in ClarificationData.model_fields
 
 
 def test_transcription_payload_uses_sequence_number() -> None:
