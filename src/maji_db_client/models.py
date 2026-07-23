@@ -55,7 +55,7 @@ class DepartmentData(ApiData):
 
 
 class ProjectData(ApiData):
-    """Create or upsert a project, optionally attached to a department."""
+    """Create or upsert a project; ``is_active`` defaults to ``True``."""
 
     project_id: UUID
     name: str
@@ -63,6 +63,7 @@ class ProjectData(ApiData):
     department_id: UUID | None = None
     project_status: str = "active"
     context_prompt: str | None = None
+    is_active: bool = True
 
 
 class DocumentData(ApiData):
@@ -86,7 +87,7 @@ class ParentChunkData(ApiData):
 
 
 class MeetingData(ApiData):
-    """Create or upsert a meeting using timezone-aware datetimes."""
+    """Create a meeting with optional join link and platform metadata."""
 
     meeting_id: UUID
     project_id: UUID
@@ -98,6 +99,8 @@ class MeetingData(ApiData):
     started_at: datetime | None = None
     ended_at: datetime | None = None
     currently_running: bool = False
+    meeting_link: str | None = None
+    meeting_platform: str | None = None
 
 
 class ClarificationData(ApiData):
@@ -140,11 +143,12 @@ class TaskData(ApiData):
 
 
 class ChatData(ApiData):
-    """Create a chat opened by an existing tenant user."""
+    """Create a chat, optionally following one project in the organization."""
 
     chat_id: UUID
     opened_by_user_id: UUID
     title: str
+    project_id: UUID | None = None
 
 
 class MessageData(ApiData):

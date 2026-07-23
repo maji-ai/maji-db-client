@@ -92,6 +92,7 @@ project = await db.create("projects", ProjectData(
     project_id=uuid4(),
     name="Example",
     description="Created by another service",
+    is_active=True,
 ))
 
 active = await db.query(
@@ -123,6 +124,12 @@ Additional methods:
 - `upsert`: atomic PostgREST merge on a unique key
 
 Typed models provide validation and autocomplete. Tables without a dedicated model accept dictionaries.
+
+Current schema fields:
+
+- `ProjectData.is_active` defaults to `True`.
+- `ChatData.project_id` optionally links a chat to one project.
+- `MeetingData.meeting_link` and `meeting_platform` are optional.
 
 Clarifications belong to a meeting. The database generates `clarification_id` and `created_at`; use the returned ID together with `meeting_id` for later operations:
 

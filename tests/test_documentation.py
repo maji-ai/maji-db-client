@@ -3,8 +3,9 @@ import inspect
 from uuid import UUID
 
 from maji_db_client import (
-    ApiData, AsyncSupabaseDatabaseClient, ClarificationData, DatabaseApiClient,
-    SupabaseDatabaseClient, TranscriptionData,
+    ApiData, AsyncSupabaseDatabaseClient, ChatData, ClarificationData,
+    DatabaseApiClient, MeetingData, ProjectData, SupabaseDatabaseClient,
+    TranscriptionData,
 )
 
 
@@ -45,6 +46,13 @@ def test_typed_payloads_have_documentation() -> None:
     assert len(MODELS) == 20
     for model in MODELS:
         assert inspect.getdoc(model)
+
+
+def test_project_chat_and_meeting_fields_match_database_contract() -> None:
+    assert ProjectData.model_fields["is_active"].default is True
+    assert ChatData.model_fields["project_id"].default is None
+    assert MeetingData.model_fields["meeting_link"].default is None
+    assert MeetingData.model_fields["meeting_platform"].default is None
 
 
 def test_clarification_payload_matches_database_contract() -> None:
