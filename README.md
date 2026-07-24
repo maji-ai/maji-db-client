@@ -130,6 +130,7 @@ Current schema fields:
 - `ProjectData.is_active` defaults to `True`.
 - `ChatData.project_id` optionally links a chat to one project.
 - `MeetingData.meeting_link` and `meeting_platform` are optional.
+- `TaskData.user_id` is optional, allowing unassigned tasks.
 
 Clarifications belong to a meeting. The database generates `clarification_id` and `created_at`; use the returned ID together with `meeting_id` for later operations:
 

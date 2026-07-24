@@ -5,7 +5,7 @@ from uuid import UUID
 from maji_db_client import (
     ApiData, AsyncSupabaseDatabaseClient, ChatData, ClarificationData,
     DatabaseApiClient, MeetingData, ProjectData, SupabaseDatabaseClient,
-    TranscriptionData,
+    TaskData, TranscriptionData,
 )
 
 
@@ -53,6 +53,7 @@ def test_project_chat_and_meeting_fields_match_database_contract() -> None:
     assert ChatData.model_fields["project_id"].default is None
     assert MeetingData.model_fields["meeting_link"].default is None
     assert MeetingData.model_fields["meeting_platform"].default is None
+    assert TaskData.model_fields["user_id"].default is None
 
 
 def test_clarification_payload_matches_database_contract() -> None:

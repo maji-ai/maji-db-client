@@ -131,13 +131,13 @@ class TranscriptionData(ApiData):
 
 
 class TaskData(ApiData):
-    """Create a meeting task assigned to exactly one tenant user."""
+    """Create a meeting task, optionally assigning it to a tenant user."""
 
     task_id: UUID
     meeting_id: UUID
-    user_id: UUID
     title: str
     deadline: datetime
+    user_id: UUID | None = None
     description: str | None = None
     system_status: str = "todo"
 
